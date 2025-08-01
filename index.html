@@ -1,1 +1,676 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FusionFace AI - Create Your AI-Powered Video</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --dark-bg: #0f0c1d;
+            --primary: #8a2be2;
+            --secondary: #00ced1;
+            --accent: #ff00ff;
+            --text: #f0f0f0;
+            --card-bg: #1a1730;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0f2a 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(138, 43, 226, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease 0.2s both;
+        }
+        
+        .hero h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            text-align: center;
+        }
+        
+        .hero p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+            min-width: 100px;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+        
+        .step-text {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        /* Pricing Banner */
+        .pricing-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, var(--primary), #6a11cb);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            animation: slideUp 0.8s ease;
+        }
+        
+        .price-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .price-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .price {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .currency {
+            font-size: 16px;
+            vertical-align: super;
+            margin-right: 2px;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 100px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease 0.4s both;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group h3 i {
+            color: var(--primary);
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+        
+        .option {
+            background: rgba(138, 43, 226, 0.1);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+        }
+        
+        .option:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .option.selected {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            color: white;
+        }
+        
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .option-desc {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .form-note {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .form-note i {
+            color: #ff5555;
+            margin-right: 8px;
+        }
+        
+        .whatsapp-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(100px); }
+            to { transform: translateY(0); }
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 800px;
+            }
+            
+            .pricing-banner {
+                width: 300px;
+                left: 20px;
+                bottom: 20px;
+                border-radius: var(--border-radius);
+            }
+            
+            .steps {
+                justify-content: space-around;
+            }
+            
+            .step {
+                max-width: 150px;
+            }
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loader {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--secondary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            font-size: 24px;
+        }
+        
+        .payment-methods i {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        
+        .info-box {
+            background: rgba(0, 206, 209, 0.1);
+            border: 1px solid rgba(0, 206, 209, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .info-box i {
+            color: var(--secondary);
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="logo-text">FusionFace AI</div>
+            </div>
+            <p class="tagline">Transform your face into amazing AI-powered videos</p>
+        </header>
+        
+        <section class="hero">
+            <h2>Create Your AI Fusion Masterpiece</h2>
+            <p>Upload your photo and we'll transform you into an extraordinary video character fused with animals, fantasy creatures, or anything you imagine!</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Upload your photo via WhatsApp</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Customize your video</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Receive your amazing video!</div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="form-container">
+            <div class="form-note">
+                <i class="fas fa-exclamation-circle"></i>
+                Important: After completing this form, you MUST send your face photo via WhatsApp to +989024645653
+            </div>
+            
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i> 
+                High-quality photos work best! Make sure your face is clearly visible with good lighting.
+            </div>
+            
+            <div class="form-group">
+                <h3><i class="fas fa-video"></i> Video Style</h3>
+                <div class="options-grid">
+                    <div class="option selected" data-price="15">
+                        <div class="option-title">Animal Fusion</div>
+                        <div class="option-desc">Combine with animals</div>
+                    </div>
+                    <div class="option" data-price="20">
+                        <div class="option-title">Fantasy Hero</div>
+                        <div class="option-desc">Mythical characters</div>
+                    </div>
+                    <div class="option" data-price="18">
+                        <div class="option-title">Cyberpunk</div>
+                        <div class="option-desc">Futuristic tech</div>
+                    </div>
+                    <div class="option" data-price="25">
+                        <div class="option-title">Superhero</div>
+                        <div class="option-desc">Comic book style</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3><i class="fas fa-expand-arrows-alt"></i> Aspect Ratio</h3>
+                <div class="options-grid">
+                    <div class="option selected" data-price="0">
+                        <div class="option-title">1:1</div>
+                        <div class="option-desc">Square</div>
+                    </div>
+                    <div class="option" data-price="0">
+                        <div class="option-title">16:9</div>
+                        <div class="option-desc">Landscape</div>
+                    </div>
+                    <div class="option" data-price="0">
+                        <div class="option-title">9:16</div>
+                        <div class="option-desc">Portrait</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3><i class="fas fa-hd"></i> Video Quality</h3>
+                <div class="options-grid">
+                    <div class="option" data-price="0">
+                        <div class="option-title">720p</div>
+                        <div class="option-desc">HD</div>
+                    </div>
+                    <div class="option selected" data-price="5">
+                        <div class="option-title">1080p</div>
+                        <div class="option-desc">Full HD</div>
+                    </div>
+                    <div class="option" data-price="15">
+                        <div class="option-title">4K</div>
+                        <div class="option-desc">Ultra HD</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3><i class="fas fa-film"></i> Frame Rate</h3>
+                <div class="options-grid">
+                    <div class="option" data-price="0">
+                        <div class="option-title">30fps</div>
+                        <div class="option-desc">Standard</div>
+                    </div>
+                    <div class="option selected" data-price="8">
+                        <div class="option-title">60fps</div>
+                        <div class="option-desc">Smooth</div>
+                    </div>
+                    <div class="option" data-price="15">
+                        <div class="option-title">120fps</div>
+                        <div class="option-desc">Ultra Smooth</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3><i class="fas fa-music"></i> Music Style</h3>
+                <div class="options-grid">
+                    <div class="option" data-price="0">
+                        <div class="option-title">Epic</div>
+                        <div class="option-desc">Orchestral</div>
+                    </div>
+                    <div class="option selected" data-price="0">
+                        <div class="option-title">Electronic</div>
+                        <div class="option-desc">EDM</div>
+                    </div>
+                    <div class="option" data-price="0">
+                        <div class="option-title">Rock</div>
+                        <div class="option-desc">Energetic</div>
+                    </div>
+                    <div class="option" data-price="0">
+                        <div class="option-title">Hip Hop</div>
+                        <div class="option-desc">Urban</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3><i class="fas fa-bolt"></i> Additional Effects</h3>
+                <div class="options-grid">
+                    <div class="option" data-price="5">
+                        <div class="option-title">Particle FX</div>
+                        <div class="option-desc">Sparkles, etc.</div>
+                    </div>
+                    <div class="option" data-price="7">
+                        <div class="option-title">3D Elements</div>
+                        <div class="option-desc">Depth effect</div>
+                    </div>
+                    <div class="option" data-price="10">
+                        <div class="option-title">Voiceover</div>
+                        <div class="option-desc">AI narration</div>
+                    </div>
+                    <div class="option" data-price="12">
+                        <div class="option-title">Special FX</div>
+                        <div class="option-desc">Fire, magic</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3><i class="fas fa-gift"></i> Delivery Options</h3>
+                <div class="options-grid">
+                    <div class="option selected" data-price="0">
+                        <div class="option-title">Standard</div>
+                        <div class="option-desc">3-5 days</div>
+                    </div>
+                    <div class="option" data-price="15">
+                        <div class="option-title">Express</div>
+                        <div class="option-desc">24-48 hours</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3><i class="fas fa-edit"></i> Additional Notes</h3>
+                <textarea id="additional-notes" rows="3" placeholder="Any special ideas or requests? Write them here..." style="width: 100%; padding: 12px; background: rgba(138, 43, 226, 0.1); border: 1px solid rgba(138, 43, 226, 0.3); border-radius: 8px; color: var(--text);"></textarea>
+            </div>
+            
+            <button class="whatsapp-btn" id="submit-btn">
+                <i class="fab fa-whatsapp"></i> Complete Order via WhatsApp
+            </button>
+            
+            <div class="loading" id="loading">
+                <div class="loader"></div>
+                <p>Preparing your order...</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="pricing-banner">
+        <div class="price-container">
+            <div class="price-label">Total Price:</div>
+            <div class="price"><span class="currency">€</span><span id="total-price">43</span></div>
+        </div>
+        <div class="payment-methods">
+            <i class="fab fa-cc-paypal" title="PayPal"></i>
+            <i class="fas fa-credit-card" title="Credit Card"></i>
+            <i class="fas fa-university" title="Bank Transfer"></i>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize pricing
+        const basePrice = 15;
+        let totalPrice = basePrice;
+        
+        // Update price display
+        function updatePrice() {
+            document.getElementById('total-price').textContent = totalPrice;
+        }
+        
+        // Recalculate total price
+        function recalculateTotal() {
+            totalPrice = basePrice;
+            
+            // Get selected options and add their prices
+            document.querySelectorAll('.option.selected').forEach(option => {
+                const price = parseFloat(option.getAttribute('data-price')) || 0;
+                totalPrice += price;
+            });
+            
+            updatePrice();
+        }
+        
+        // Option selection
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Get parent group
+                const group = this.closest('.form-group');
+                
+                // Remove selected class from siblings in the same group
+                const siblings = group.querySelectorAll('.option');
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Recalculate total price
+                recalculateTotal();
+            });
+        });
+        
+        // WhatsApp submission
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            // Show loading animation
+            document.getElementById('loading').style.display = 'block';
+            
+            // Simulate processing delay
+            setTimeout(function() {
+                // Get selected options
+                const selectedOptions = [];
+                document.querySelectorAll('.option.selected').forEach(option => {
+                    selectedOptions.push(option.querySelector('.option-title').textContent);
+                });
+                
+                // Get additional notes
+                const additionalNotes = document.getElementById('additional-notes').value;
+                
+                // Compose WhatsApp message
+                const phoneNumber = "+989024645653";
+                let message = "Hello! I want to order an AI Fusion video.\n\n";
+                message += "*My selections:*\n";
+                message += "▫️ Video Style: " + selectedOptions[0] + "\n";
+                message += "▫️ Aspect Ratio: " + selectedOptions[1] + "\n";
+                message += "▫️ Video Quality: " + selectedOptions[2] + "\n";
+                message += "▫️ Frame Rate: " + selectedOptions[3] + "\n";
+                message += "▫️ Music Style: " + selectedOptions[4] + "\n";
+                message += "▫️ Delivery Option: " + selectedOptions[5] + "\n";
+                message += "\n";
+                message += "*Additional Notes:*\n" + (additionalNotes || "No additional notes") + "\n\n";
+                message += "Total Price: €" + totalPrice + "\n\n";
+                message += "I'll send my face photo in the next message.";
+                
+                // Open WhatsApp
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                
+                // Hide loading animation
+                document.getElementById('loading').style.display = 'none';
+            }, 1500);
+        });
+        
+        // Initialize price display
+        recalculateTotal();
+    </script>
+</body>
+</html>
