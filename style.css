@@ -183,7 +183,7 @@ header {
     background: var(--card-bg);
     border-radius: var(--border-radius);
     padding: 25px;
-    margin-bottom: 100px;
+    margin-bottom: 200px;
     border: 1px solid rgba(138, 43, 226, 0.3);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     animation: fadeIn 1s ease 0.4s both;
