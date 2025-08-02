@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="style.css?v=1754091917">
 </head>
 <body>
+    <!-- Vertical Sidebar Menu -->
+    <nav class="vertical-menu">
+        <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#"><i class="fas fa-images"></i> Gallery</a>
+        <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+    </nav>
+
     <div class="container">
         <header>
             <div class="logo">
@@ -22,7 +31,6 @@
         <section class="hero">
             <h2>Create Your AI Fusion Masterpiece</h2>
             <p>Upload your photo and we'll transform you into an extraordinary video character fused with animals, fantasy creatures, or anything you imagine!</p>
-            
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
@@ -38,7 +46,32 @@
                 </div>
             </div>
         </section>
-        
+
+        <!-- Showcase Section (added after hero) -->
+        <section class="showcase">
+            <div class="showcase-item">
+                <h3>Your Face</h3>
+                <div class="media-container">
+                    <img src="https://via.placeholder.com/300x200?text=Your+Face" alt="Your Face">
+                </div>
+            </div>
+            <div class="showcase-item">
+                <h3>AI Transformation</h3>
+                <div class="media-container">
+                    <img src="https://via.placeholder.com/300x200?text=AI+Image" alt="AI Transformation">
+                </div>
+            </div>
+            <div class="showcase-item">
+                <h3>Final Output</h3>
+                <div class="media-container">
+                    <video controls poster="https://via.placeholder.com/300x200?text=Video+Preview">
+                        <source src="sample-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
         <div class="form-container">
             <div class="form-note">
                 <i class="fas fa-exclamation-circle"></i>
