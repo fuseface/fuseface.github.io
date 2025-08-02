@@ -115,10 +115,10 @@ document.getElementById('telegram-btn').addEventListener('click', function() {
         const telegramUsername = "kohandev";
         
         // Open Telegram - THIS WORKS FOR REGULAR ACCOUNTS
-        window.open(`https://t.me/share/url?url=&text=${message}`, '_blank');
+        // window.open(`https://t.me/share/url?url=&text=${message}`, '_blank');
         
         // ALTERNATIVE METHOD THAT ALSO WORKS:
-        // window.open(`tg://msg?text=${message}&to=${telegramUsername}`, '_blank');
+        window.open(`tg://msg?text=${message}&to=${telegramUsername}`, '_blank');
 
         // Hide loading animation
         document.getElementById('loading').style.display = 'none';
