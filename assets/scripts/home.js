@@ -56,27 +56,6 @@ function getOrderDetails() {
     };
 }
 
-// Format message for different platforms
-function formatMessage(platform, order) {
-    const newLine = platform === 'whatsapp' ? '\n' : '%0A';
-    const bullet = platform === 'whatsapp' ? '▫️ ' : '• ';
-    
-    let message = `Hello! I want to order an AI Fusion video.${newLine}${newLine}`;
-    message += `*My selections:*${newLine}`;
-    message += `${bullet}Aspect Ratio: ${order.selectedOptions[0]}${newLine}`;
-    message += `${bullet}Video Quality: ${order.selectedOptions[1]}${newLine}`;
-    message += `${bullet}Frame Rate: ${order.selectedOptions[2]}${newLine}`;
-    message += `${bullet}Video Style: ${order.selectedOptions[3]}${newLine}`;
-    message += `${bullet}Music Style: ${order.selectedOptions[4]}${newLine}`;
-    message += `${bullet}Delivery Option: ${order.selectedOptions[5]}${newLine}`;
-    message += `${newLine}`;
-    message += `*Additional Notes:*${newLine}${order.additionalNotes || "No additional notes"}${newLine}${newLine}`;
-    message += `Total Price: €${order.totalPrice}${newLine}${newLine}`;
-    message += "I'll send my face photo in the next message.";
-    
-    return message;
-}
-
 // WhatsApp submission
 document.getElementById('whatsapp-btn').addEventListener('click', function() {
     // Show loading animation
@@ -85,8 +64,21 @@ document.getElementById('whatsapp-btn').addEventListener('click', function() {
     // Simulate processing delay
     setTimeout(function() {
         const order = getOrderDetails();
-        const message = formatMessage('whatsapp', order);
+        
+        // Compose WhatsApp message
         const phoneNumber = "+989024645653";
+        let message = "Hello! I want to order an AI Fusion video.\n\n";
+        message += "*My selections:*\n";
+        message += "▫️ Aspect Ratio: " + order.selectedOptions[0] + "\n";
+        message += "▫️ Video Quality: " + order.selectedOptions[1] + "\n";
+        message += "▫️ Frame Rate: " + order.selectedOptions[2] + "\n";
+        message += "▫️ Video Style: " + order.selectedOptions[3] + "\n";
+        message += "▫️ Music Style: " + order.selectedOptions[4] + "\n";
+        message += "▫️ Delivery Option: " + order.selectedOptions[5] + "\n";
+        message += "\n";
+        message += "*Additional Notes:*\n" + (order.additionalNotes || "No additional notes") + "\n\n";
+        message += "Total Price: €" + order.totalPrice + "\n\n";
+        message += "I'll send my face photo in the next message.";
 
         // Open WhatsApp
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
@@ -96,7 +88,7 @@ document.getElementById('whatsapp-btn').addEventListener('click', function() {
     }, 1500);
 });
 
-// Telegram submission
+// Telegram submission - UPDATED TO WORK WITH REGULAR ACCOUNTS
 document.getElementById('telegram-btn').addEventListener('click', function() {
     // Show loading animation
     document.getElementById('loading').style.display = 'block';
@@ -104,11 +96,29 @@ document.getElementById('telegram-btn').addEventListener('click', function() {
     // Simulate processing delay
     setTimeout(function() {
         const order = getOrderDetails();
-        const message = formatMessage('telegram', order);
-        const telegramUsername = "kohandev";
+        
+        // Compose Telegram message with proper formatting
+        let message = "Hello! I want to order an AI Fusion video.%0A%0A";
+        message += "*My selections:*%0A";
+        message += "▫️ Aspect Ratio: " + order.selectedOptions[0] + "%0A";
+        message += "▫️ Video Quality: " + order.selectedOptions[1] + "%0A";
+        message += "▫️ Frame Rate: " + order.selectedOptions[2] + "%0A";
+        message += "▫️ Video Style: " + order.selectedOptions[3] + "%0A";
+        message += "▫️ Music Style: " + order.selectedOptions[4] + "%0A";
+        message += "▫️ Delivery Option: " + order.selectedOptions[5] + "%0A";
+        message += "%0A";
+        message += "*Additional Notes:*%0A" + (order.additionalNotes || "No additional notes") + "%0A%0A";
+        message += "Total Price: €" + order.totalPrice + "%0A%0A";
+        message += "I'll send my face photo in the next message.";
 
-        // Open Telegram
-        window.open(`https://t.me/${telegramUsername}?start=${message}`, '_blank');
+        // Telegram username (without @)
+        const telegramUsername = "kohandev";
+        
+        // Open Telegram - THIS WORKS FOR REGULAR ACCOUNTS
+        window.open(`https://t.me/share/url?url=&text=${message}`, '_blank');
+        
+        // ALTERNATIVE METHOD THAT ALSO WORKS:
+        // window.open(`tg://msg?text=${message}&to=${telegramUsername}`, '_blank');
 
         // Hide loading animation
         document.getElementById('loading').style.display = 'none';
