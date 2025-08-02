@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FusionFace AI - Create Your AI-Powered Video</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css?v=1754094626">
+</head>
+<body>
+    <!-- Vertical Sidebar Menu -->
+    <nav class="vertical-menu">
+        <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#"><i class="fas fa-images"></i> Gallery</a>
+        <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+    </nav>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="logo-text">FusionFace AI</div>
+            </div>
+            <p class="tagline">Transform your face into amazing AI-powered videos</p>
+        </header>
+
+        <section class="page-content">
+            <h1>Contact Us</h1>
+            
+            <div class="content-card">
+                <h2>Get In Touch</h2>
+                <p>Have questions or need support? Reach out to our team through any of these channels:</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-card whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p>+98 902 464 5653</p>
+                        <a href="https://wa.me/989024645653" class="contact-btn">Message Us</a>
+                    </div>
+                    
+                    <div class="contact-card email">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>support@fusionfaceai.com</p>
+                        <a href="mailto:support@fusionfaceai.com" class="contact-btn">Send Email</a>
+                    </div>
+                    
+                    <div class="contact-card telegram">
+                        <i class="fab fa-telegram"></i>
+                        <h3>Telegram</h3>
+                        <p>@FusionFaceSupport</p>
+                        <a href="https://t.me/FusionFaceSupport" class="contact-btn">Join Channel</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h2>Support Hours</h2>
+                <div class="support-hours">
+                    <div class="hour-item">
+                        <div class="day">Monday-Friday</div>
+                        <div class="time">9:00 AM - 8:00 PM (GMT+3:30)</div>
+                    </div>
+                    <div class="hour-item">
+                        <div class="day">Saturday</div>
+                        <div class="time">10:00 AM - 6:00 PM (GMT+3:30)</div>
+                    </div>
+                    <div class="hour-item">
+                        <div class="day">Sunday</div>
+                        <div class="time">Closed</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-card faq">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        How long does processing take?
+                    </div>
+                    <div class="faq-answer">
+                        Processing typically takes 24-48 hours for standard orders. Express delivery options are available.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        What photo quality do you require?
+                    </div>
+                    <div class="faq-answer">
+                        We recommend high-resolution photos (at least 1000x1000 pixels) with good lighting and clear facial features.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        Can I request revisions?
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We offer one free revision per order. Additional revisions are available at a small fee.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+        <script>
+        // Initialize pricing
+        const basePrice = 15;
+        let totalPrice = basePrice;
+        
+        // Update price display
+        function updatePrice() {
+            document.getElementById('total-price').textContent = totalPrice;
+        }
+        
+        // Recalculate total price
+        function recalculateTotal() {
+            totalPrice = basePrice;
+            
+            // Get selected options and add their prices
+            document.querySelectorAll('.option.selected').forEach(option => {
+                const price = parseFloat(option.getAttribute('data-price')) || 0;
+                totalPrice += price;
+            });
+            
+            updatePrice();
+        }
+        
+        // Option selection
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Get parent group
+                const group = this.closest('.form-group');
+                
+                // Remove selected class from siblings in the same group
+                const siblings = group.querySelectorAll('.option');
+                siblings.forEach(sibling => {
+                    sibling.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Recalculate total price
+                recalculateTotal();
+            });
+        });
+        
+        // WhatsApp submission
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            // Show loading animation
+            document.getElementById('loading').style.display = 'block';
+            
+            // Simulate processing delay
+            setTimeout(function() {
+                // Get selected options
+                const selectedOptions = [];
+                document.querySelectorAll('.option.selected').forEach(option => {
+                    selectedOptions.push(option.querySelector('.option-title').textContent);
+                });
+                
+                // Get additional notes
+                const additionalNotes = document.getElementById('additional-notes').value;
+                
+                // Compose WhatsApp message
+                const phoneNumber = "+989024645653";
+                let message = "Hello! I want to order an AI Fusion video.\n\n";
+                message += "*My selections:*\n";
+                message += "▫️ Video Style: " + selectedOptions[0] + "\n";
+                message += "▫️ Aspect Ratio: " + selectedOptions[1] + "\n";
+                message += "▫️ Video Quality: " + selectedOptions[2] + "\n";
+                message += "▫️ Frame Rate: " + selectedOptions[3] + "\n";
+                message += "▫️ Music Style: " + selectedOptions[4] + "\n";
+                message += "▫️ Delivery Option: " + selectedOptions[5] + "\n";
+                message += "\n";
+                message += "*Additional Notes:*\n" + (additionalNotes || "No additional notes") + "\n\n";
+                message += "Total Price: €" + totalPrice + "\n\n";
+                message += "I'll send my face photo in the next message.";
+                
+                // Open WhatsApp
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                
+                // Hide loading animation
+                document.getElementById('loading').style.display = 'none';
+            }, 1500);
+        });
+        
+        // Initialize price display
+        recalculateTotal();
+    </script>
+</body>
+</html>
